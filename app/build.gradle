@@ -41,7 +41,7 @@ testCoverageEnabled=true
             html.enabled = true
         }
         classDirectories = fileTree(
-                dir: 'build/intermediates/classes/debug',
+                dir: 'build/intermediates',
                 excludes: ['com/toast/android/mobill/core/BuildConfig.class'
                 ])
      //   sourceDirectories = files(coverageSourceDirs)
