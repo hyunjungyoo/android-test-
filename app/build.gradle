@@ -25,30 +25,32 @@ android {
         compile 'com.android.support:appcompat-v7:23.1.0'
         compile 'com.android.support:design:23.1.0'
     }
-// Add Jacoco
+
+
+/*debug{
+testCoverageEnabled=true
+}*/
+
     apply plugin: 'jacoco'
 
-    debug {
-        testCoverageEnabled = true
-    }
-    /*task jacocoTestReport(type: jacocoTestReport, dependsOn: "testDebug") {
+    task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
         group = "Reporting"
-        description = "Generate Jacoco coverage after running tests."
+        description = "Generate Jacoco coverage reports after running tests."
         reports {
-            xml.enabled = true //coveralls plugin depends on xml format report
+            xml.enabled = true // coveralls plugin depends on xml format report
             html.enabled = true
         }
         classDirectories = fileTree(
                 dir: 'build/intermediates/classes/debug',
                 excludes: ['com/toast/android/mobill/core/BuildConfig.class'
                 ])
-        sourceDirectories = files(coverageSourceDirs)
+     //   sourceDirectories = files(coverageSourceDirs)
         executionData = files('build/jacoco/testDebug.exec')
 
-        afterEvaualte {
-            testDebug.reports.junitxml.enabled = false
-        }
-    } // end of ADD jacoco
-*/
+      //  afterEvaluate {
+            // just clean up coveralls dashboard, following reports are not of interest
+        //    testDebug.reports.junitXml.enabled = false
+      //  }
+    }
 }
 
