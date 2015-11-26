@@ -49,7 +49,7 @@ android {
 
         additionalSourceDirs = files(coverageSourceDirs)
         sourceDirectories = files(coverageSourceDirs)
-        executionData = files('../app/build/jacoco/testDebug.exec')
+        executionData = files('..app/build/intermediates/classes/testDebug.exec')
 
         reports {
             xml.enabled = true
