@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-   }
+    }
 
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,34 +27,34 @@ android {
     }
 
 
-/*debug{
-testCoverageEnabled=true
-}*/
-
     apply plugin: 'jacoco'
 
-    def coverageSourceDirs =[
-            '../app/src'
+    def coverageSourceDirs = [
+            '../app/src/main/java'
     ]
 
     task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
         group = "Reporting"
-        description = "Generate Jacoco coverage reports after running tests."
-        reports {
-            xml.enabled = true // coveralls plugin depends on xml format report
-            html.enabled = true
-        }
+
+        description = "Generate Jacoco coverage reports"
+
         classDirectories = fileTree(
-                dir: 'build/intermediates/classes/debug',
-                excludes: ['com/toast/android/mobill/core/BuildConfig.class'
-                ])
-       sourceDirectories = files(coverageSourceDirs)
+                dir: '../app/build/intermediates/classes/debug',
+                excludes: ['**/R.class',
+                           '**/R$*.class',
+                           '**/*$ViewInjector*.*',
+                           '**/BuildConfig.*',
+                           '**/Manifest*.*']
+        )
+
+        additionalSourceDirs = files(coverageSourceDirs)
+        sourceDirectories = files(coverageSourceDirs)
         executionData = files('../app/build/jacoco/testDebug.exec')
 
-      //  afterEvaluate {
-            // just clean up coveralls dashboard, following reports are not of interest
-        //    testDebug.reports.junitXml.enabled = false
-      //  }
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
     }
-}
 
+}
