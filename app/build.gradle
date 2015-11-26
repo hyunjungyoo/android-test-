@@ -49,7 +49,7 @@ android {
 
         additionalSourceDirs = files(coverageSourceDirs)
         sourceDirectories = files(coverageSourceDirs)
-        executionData = files('../app/build/intermediates/classes/debug.exec')
+        executionData = files('**/**.ec')
 
         reports {
             xml.enabled = true
